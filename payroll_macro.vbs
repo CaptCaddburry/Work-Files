@@ -3,7 +3,8 @@ Sub future_dates()
 ' future_dates Macro
 '
 '
-    Dim price As Integer
+    Dim price, shipping As Integer
+    shipping = 0
     
     With ActiveDocument
         If .FormFields("Check1").CheckBox.Value = True Then
@@ -19,7 +20,7 @@ Sub future_dates()
     
     With ActiveDocument
         If .FormFields("Check3").CheckBox.Value = True Then
-            price = 200
+            price = 100
         End If
     End With
     
@@ -37,7 +38,7 @@ Sub future_dates()
     
     With ActiveDocument
         If .FormFields("Check6").CheckBox.Value = True Then
-            price = 100
+            price = 300
         End If
     End With
     
@@ -49,13 +50,19 @@ Sub future_dates()
     
     With ActiveDocument
         If .FormFields("Check8").CheckBox.Value = True Then
-            price = 600
+            price = 400
         End If
     End With
     
     With ActiveDocument
         If .FormFields("Check9").CheckBox.Value = True Then
             price = 400
+        End If
+    End With
+    
+    With ActiveDocument
+        If .FormFields("Check11").CheckBox.Value = True Then
+            shipping = 25
         End If
     End With
         
@@ -98,7 +105,7 @@ Sub future_dates()
         .ClearFormatting
         .Text = "<<price1>>"
         .Replacement.ClearFormatting
-        .Replacement.Text = "$" + Str(price)
+        .Replacement.Text = "$" + Str(price + shipping)
         .Execute Replace:=wdReplaceAll, Forward:=True, Wrap:=wdFindContinue
     End With
     
@@ -114,7 +121,7 @@ Sub future_dates()
         .ClearFormatting
         .Text = "<<price2>>"
         .Replacement.ClearFormatting
-        .Replacement.Text = "$" + Str((price / 2))
+        .Replacement.Text = "$" + Str(((price + shipping) / 2))
         .Execute Replace:=wdReplaceAll, Forward:=True, Wrap:=wdFindContinue
     End With
     
@@ -130,7 +137,7 @@ Sub future_dates()
         .ClearFormatting
         .Text = "<<price4>>"
         .Replacement.ClearFormatting
-        .Replacement.Text = "$" + Str((price / 4))
+        .Replacement.Text = "$" + Str(((price + shipping) / 4))
         .Execute Replace:=wdReplaceAll, Forward:=True, Wrap:=wdFindContinue
     End With
     
