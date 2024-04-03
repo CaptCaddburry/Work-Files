@@ -76,30 +76,22 @@ Sub future_dates()
     End If
     
     If Format(newDate, "d") >= 15 And Format(newDate, "d") < 32 Then
-        newDate2 = DateSerial(Year(newDate), Month(newDate) + 1, 15)
+        newDate2 = DateSerial(Year(newDate), Month(newDate) + 1, 0)
         Else
-            newDate2 = DateSerial(Year(newDate), Month(newDate) + 1, 0)
+            newDate2 = DateSerial(Year(newDate), Month(newDate), 15)
     End If
     
     If Format(newDate2, "d") >= 15 And Format(newDate2, "d") < 32 Then
-        newDate3 = DateSerial(Year(newDate2), Month(newDate2) + 1, 0)
+        newDate3 = DateSerial(Year(newDate2), Month(newDate2) + 1, 15)
         Else
-            newDate3 = DateSerial(Year(newDate2), Month(newDate2), 15)
+            newDate3 = DateSerial(Year(newDate2), Month(newDate2) + 1, 0)
     End If
     
     If Format(newDate3, "d") >= 15 And Format(newDate3, "d") < 32 Then
-        newDate4 = DateSerial(Year(newDate3), Month(newDate3) + 1, 15)
+        newDate4 = DateSerial(Year(newDate3), Month(newDate3) + 1, 0)
         Else
-            newDate4 = DateSerial(Year(newDate3), Month(newDate3) + 1, 0)
+            newDate4 = DateSerial(Year(newDate3), Month(newDate3) + 1, 15)
     End If
-    
-    With Selection.Find
-        .ClearFormatting
-        .Text = "<<today>>"
-        .Replacement.ClearFormatting
-        .Replacement.Text = Format(Date, "mmmm dd yyyy")
-        .Execute Replace:=wdReplaceAll, Forward:=True, Wrap:=wdFindContinue
-    End With
     
     With Selection.Find
         .ClearFormatting
