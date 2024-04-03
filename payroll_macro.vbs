@@ -75,19 +75,19 @@ Sub future_dates()
             newDate = DateSerial(Year(Date), Month(Date), 15)
     End If
     
-    If Format(newDate, "d") >= 15 And Format(newDate, "d") < 32 Then
+    If Format(newDate, "d") == 15 Then
         newDate2 = DateSerial(Year(newDate), Month(newDate) + 1, 0)
         Else
-            newDate2 = DateSerial(Year(newDate), Month(newDate), 15)
+            newDate2 = DateSerial(Year(newDate), Month(newDate) + 1, 15)
     End If
     
-    If Format(newDate2, "d") >= 15 And Format(newDate2, "d") < 32 Then
-        newDate3 = DateSerial(Year(newDate2), Month(newDate2) + 1, 15)
+    If Format(newDate2, "d") == 15 Then
+        newDate3 = DateSerial(Year(newDate2), Month(newDate2) + 1, 0)
         Else
-            newDate3 = DateSerial(Year(newDate2), Month(newDate2) + 1, 0)
+            newDate3 = DateSerial(Year(newDate2), Month(newDate2) + 1, 15)
     End If
     
-    If Format(newDate3, "d") >= 15 And Format(newDate3, "d") < 32 Then
+    If Format(newDate3, "d") == 15 Then
         newDate4 = DateSerial(Year(newDate3), Month(newDate3) + 1, 0)
         Else
             newDate4 = DateSerial(Year(newDate3), Month(newDate3) + 1, 15)
