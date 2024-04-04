@@ -11,38 +11,18 @@ Sub future_dates()
 
     pricePlaceholders = Array("<<price1>>", "<<price2>>", "<<price4>>")
     datePlaceholders = Array("<<1 payment>>", "<<2 payment>>", "<<4 payment>>")
+    ' priceList = (HP Elitebook G5 Laptop, MacBook Pro A1989, Surface Pro 5, HP Elitebook G7, HP Elitebook G8, Surface Pro 7, MacBook Pro A1990, MacBook Pro A2141, MacBook Pro A2338)
+    priceList = Array(100, 400, 100, 200, 400, 300, 400, 400, 400)
     shipping = 0
-    
+
     ' When you run the macro, it checks which checkboxes are selected and updates price/shipping variables
     '
-    If ActiveDocument.FormFields("Check1").CheckBox.Value = True Then ' Check1 = HP Elitebook G5 Laptop
-        price = 100
-    End If
-    If ActiveDocument.FormFields("Check2").CheckBox.Value = True Then ' Check2 = MacBook Pro A1989
-        price = 400
-    End If
-    If ActiveDocument.FormFields("Check3").CheckBox.Value = True Then ' Check3 = Surface Pro 5
-        price = 100
-    End If
-    If ActiveDocument.FormFields("Check4").CheckBox.Value = True Then ' Check4 = HP Elitebook G7
-        price = 200
-    End If
-    If ActiveDocument.FormFields("Check5").CheckBox.Value = True Then ' Check5 = HP Elitebook G8
-        price = 400
-    End If
-    If ActiveDocument.FormFields("Check6").CheckBox.Value = True Then ' Check6 = Surface Pro 7
-        price = 300
-    End If
-    If ActiveDocument.FormFields("Check7").CheckBox.Value = True Then ' Check7 = MacBook Pro A1990
-        price = 400
-    End If
-    If ActiveDocument.FormFields("Check8").CheckBox.Value = True Then ' Check8 = MacBook Pro A2141
-        price = 400
-    End If
-    If ActiveDocument.FormFields("Check9").CheckBox.Value = True Then ' Check9 = MacBook Pro A2338
-        price = 400
-    End If
-    If ActiveDocument.FormFields("Check10").CheckBox.Value = True Then ' Check10 = Shipping Cost
+    For member = 0 To 8
+        If ActiveDocument.FormFields("Check" + CStr(member + 1)).CheckBox.Value = True Then
+            price = priceList(member)
+        End If
+    Next
+    If ActiveDocument.FormFields("Check10").CheckBox.Value = True Then
         shipping = 25
     End If
 
@@ -95,7 +75,7 @@ Sub future_dates()
             .ClearFormatting
             .Text = pricePlaceholders(member)
             .Replacement.ClearFormatting
-            .Replacement.Text = "$" + Str(total(member))
+            .Replacement.Text = "$" + CStr(total(member))
             .Execute Replace:=wdReplaceAll, Forward:=True, Wrap:=wdFindContinue
         End With
 
@@ -104,7 +84,7 @@ Sub future_dates()
                 .ClearFormatting
                 .Text = datePlaceholders(member)
                 .Replacement.ClearFormatting
-                .Replacement.Text = Format(Str(newDates(member)), "mmmm dd, yyyy")
+                .Replacement.Text = Format(CStr(newDates(member)), "mmmm dd, yyyy")
                 .Execute Replace:=wdReplaceAll, Forward:=True, Wrap:=wdFindContinue
             End With
         ElseIf member = 1 Then
@@ -112,7 +92,7 @@ Sub future_dates()
                 .ClearFormatting
                 .Text = datePlaceholders(member)
                 .Replacement.ClearFormatting
-                .Replacement.Text = Format(Str(newDates(member - 1)), "mmmm dd, yyyy") + " + " + Format(Str(newDates(member)), "mmmm dd, yyyy")
+                .Replacement.Text = Format(CStr(newDates(member - 1)), "mmmm dd, yyyy") + " + " + Format(CStr(newDates(member)), "mmmm dd, yyyy")
                 .Execute Replace:=wdReplaceAll, Forward:=True, Wrap:=wdFindContinue
             End With
         ElseIf member = 2 Then
@@ -120,7 +100,7 @@ Sub future_dates()
                 .ClearFormatting
                 .Text = datePlaceholders(member)
                 .Replacement.ClearFormatting
-                .Replacement.Text = Format(Str(newDates(member - 2)), "mmmm dd, yyyy") + " + " + Format(Str(newDates(member - 1)), "mmmm dd, yyyy") + " + " + Format(Str(newDates(member)), "mmmm dd, yyyy") + " + " + Format(Str(newDates(member + 1)), "mmmm dd, yyyy")
+                .Replacement.Text = Format(CStr(newDates(member - 2)), "mmmm dd, yyyy") + " + " + Format(CStr(newDates(member - 1)), "mmmm dd, yyyy") + " + " + Format(CStr(newDates(member)), "mmmm dd, yyyy") + " + " + Format(CStr(newDates(member + 1)), "mmmm dd, yyyy")
                 .Execute Replace:=wdReplaceAll, Forward:=True, Wrap:=wdFindContinue
             End With
         End If
