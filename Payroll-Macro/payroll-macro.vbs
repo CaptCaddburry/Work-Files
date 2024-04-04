@@ -3,7 +3,6 @@ Sub future_dates()
 ' future_dates Macro
 '
 '
-    Dim price, shipping As Integer
     Dim total(2) As Double ' total is set as an array, that accepts Double values
     Dim newDates(3) As Date ' newDates is set as an array, that accepts Date values
     Dim pricePlaceholders, datePlaceholders, priceList As Variant ' The placeholder variables are going to be used as arrays to run through the for loop
@@ -11,23 +10,17 @@ Sub future_dates()
 
     pricePlaceholders = Array("<<price1>>", "<<price2>>", "<<price4>>")
     datePlaceholders = Array("<<1 payment>>", "<<2 payment>>", "<<4 payment>>")
-    ' priceList = (HP Elitebook G5 Laptop, MacBook Pro A1989, Surface Pro 5, HP Elitebook G7, HP Elitebook G8, Surface Pro 7, MacBook Pro A1990, MacBook Pro A2141, MacBook Pro A2338)
-    priceList = Array(100, 400, 100, 200, 400, 300, 400, 400, 400)
-    shipping = 0
+    ' priceList = (HP Elitebook G5 Laptop, MacBook Pro A1989, Surface Pro 5, HP Elitebook G7, HP Elitebook G8, Surface Pro 7, MacBook Pro A1990, MacBook Pro A2141, MacBook Pro A2338, Shipping Cost)
+    priceList = Array(100, 400, 100, 200, 400, 300, 400, 400, 400, 25)
 
-    ' When you run the macro, it checks which checkboxes are selected and updates price/shipping variables
-    '
-    For member = 0 To 8
+    ' When you run the macro, it checks which checkboxes are selected and updates the total variable
+    For member = 0 To 9
         If ActiveDocument.FormFields("Check" + CStr(member + 1)).CheckBox.Value = True Then
-            price = priceList(member)
+            total(0) = total(0) + priceList(member)
         End If
     Next
-    If ActiveDocument.FormFields("Check10").CheckBox.Value = True Then
-        shipping = 25
-    End If
 
     ' Next, the macro will get the totals for the outputs
-    total(0) = (price + shipping) ' 1 Total Payment
     total(1) = (total(0) / 2) ' 2 Total Payments
     total(2) = (total(0) / 4) ' 4 Total Payments
 
