@@ -6,7 +6,7 @@ Sub future_dates()
     Dim price, shipping As Integer
     Dim total(2) As Double ' total is set as an array, that accepts Double values
     Dim newDates(3) As Date ' newDates is set as an array, that accepts Date values
-    Dim pricePlaceholders, datePlaceholders As Variant ' The placeholder variables are going to be used as arrays to run through the for loop
+    Dim pricePlaceholders, datePlaceholders, priceList As Variant ' The placeholder variables are going to be used as arrays to run through the for loop
     Dim member As Integer ' member will be used as a step counter for the for loop
 
     pricePlaceholders = Array("<<price1>>", "<<price2>>", "<<price4>>")
