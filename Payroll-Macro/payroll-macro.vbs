@@ -70,27 +70,17 @@ Sub future_dates()
 
     If Format(Date, "d") >= 15 Then
         newDates(0) = DateSerial(Year(Date), Month(Date) + 1, 0)
-        Else
-            newDates(0) = DateSerial(Year(Date), Month(Date), 15)
+    Else
+        newDates(0) = DateSerial(Year(Date), Month(Date), 15)
     End If
     
-    If Format(newDates(0), "d") = 15 Then
-        newDates(1) = DateSerial(Year(newDates(0)), Month(newDates(0)) + 1, 0)
+    For member = 0 To 2
+        If Format(newDates(member), "d") = 15 Then
+            newDates(member + 1) = DateSerial(Year(newDates(member)), Month(newDates(member)) + 1, 0)
         Else
-            newDates(1) = DateSerial(Year(newDates(0)), Month(newDates(0)) + 1, 15)
-    End If
-    
-    If Format(newDates(1), "d") = 15 Then
-        newDates(2) = DateSerial(Year(newDates(1)), Month(newDates(1)) + 1, 0)
-        Else
-            newDates(2) = DateSerial(Year(newDates(1)), Month(newDates(1)) + 1, 15)
-    End If
-    
-    If Format(newDates(2), "d") = 15 Then
-        newDates(3) = DateSerial(Year(newDates(2)), Month(newDates(2)) + 1, 0)
-        Else
-            newDates(3) = DateSerial(Year(newDates(2)), Month(newDates(2)) + 1, 15)
-    End If
+            newDates(member + 1) = DateSerial(Year(newDates(member)), Month(newDates(member)) + 1, 15)
+        End If
+    Next
 
     ' The following section will find the price and date placeholders and replace them with the updated variables
     ' NewDates will be formatted as (long month, day, long year)
