@@ -10,11 +10,15 @@ Sub future_dates()
 
     pricePlaceholders = Array("<<price1>>", "<<price2>>", "<<price4>>")
     datePlaceholders = Array("<<1 payment>>", "<<2 payment>>", "<<4 payment>>")
-    ' priceList = (HP Elitebook G5 Laptop, MacBook Pro A1989, Surface Pro 5, HP Elitebook G7, HP Elitebook G8, Surface Pro 7, MacBook Pro A1990, MacBook Pro A2141, MacBook Pro A2338, Shipping Cost)
-    priceList = Array(100, 400, 100, 200, 400, 300, 400, 400, 400, 25)
+    ' update the priceList array when different laptops are added or removed from the sheet
+    ' priceList = (HP Elitebook G8 Laptop, MacBook Pro, Shipping Cost)
+    priceList = Array(300, 400, 25)
 
     ' When you run the macro, it checks which checkboxes are selected and updates the total variable
-    For member = 0 To 9
+    ' UBound(priceList) grabs the upper-bound member of the array, so the for loop will look through every member
+    ' The checkboxes are labeled as "Check#" with no spaces, so the function will take the current member value and match it to the correct checkbox
+    ' Example: member=0 -> Check1, member=1 -> Check2, etc.
+    For member = 0 To UBound(priceList)
         If ActiveDocument.FormFields("Check" + CStr(member + 1)).CheckBox.Value = True Then
             total(0) = total(0) + priceList(member)
         End If
